@@ -24,7 +24,7 @@ mainContainer.Position = UDim2.new(0.5, -150, 0.5, -200)
 mainContainer.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 mainContainer.BorderSizePixel = 2
 mainContainer.BorderColor3 = Color3.fromRGB(106, 13, 173)
-mainContainer.Visible = false
+mainContainer.Visible = true
 mainContainer.Name = "MainContainer"
 
 -- Función para hacer arrastrable el menú
