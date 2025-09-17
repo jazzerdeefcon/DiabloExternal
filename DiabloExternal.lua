@@ -1,4 +1,4 @@
-
+--local licenciaValida = "123"
 local aimbotMode = nil -- "head" o "body"
 local espMode = nil -- "top" o "bottom"
 local noclipActive = false -- Variable para controlar el estado del noclip
@@ -464,13 +464,64 @@ local function showContent(contentName)
     end
 end
 
+-- Crear página de licencia
+--local licensePage = Instance.new("Frame", gui)
+--licensePage.Size = UDim2.new(0, 300, 0, 200)
+--licensePage.Position = UDim2.new(0.5, -150, 0.5, -100)
+--licensePage.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+--licensePage.BorderSizePixel = 2
+--licensePage.BorderColor3 = Color3.fromRGB(106, 13, 173)
+--licensePage.Visible = true
 
+-- Contenido página de licencia
+--local titulo = Instance.new("TextLabel", licensePage)
+--titulo.Size = UDim2.new(1, 0, 0, 50)
+--titulo.Position = UDim2.new(0, 0, 0, 0)
+--titulo.Text = "👹Diablo External👹"
+--titulo.TextColor3 = Color3.fromRGB(255, 255, 255)
+--titulo.Font = Enum.Font.GothamBold
+--titulo.TextSize = 20
+--titulo.BackgroundTransparency = 1
+
+--local input = Instance.new("TextBox", licensePage)
+--input.Size = UDim2.new(1, -40, 0, 30)
+--input.Position = UDim2.new(0, 20, 0, 80)
+--input.PlaceholderText = "Ingrese su licencia"
+--input.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+--input.TextColor3 = Color3.fromRGB(255, 255, 255)
+--input.Font = Enum.Font.Gotham
+
+--local verificarBtn = Instance.new("TextButton", licensePage)
+--verificarBtn.Size = UDim2.new(1, -40, 0, 35)
+--verificarBtn.Position = UDim2.new(0, 20, 0, 130)
+--verificarBtn.Text = "VERIFICAR"
+--verificarBtn.Font = Enum.Font.GothamBold
+--verificarBtn.TextColor3 = Color3.fromRGB(0, 0, 0) -- Texto negro
+--verificarBtn.BackgroundColor3 = Color3.fromRGB(200, 0, 0) -- Fondo rojo
+
+-- Verificación de licencia
+--verificarBtn.MouseButton1Click:Connect(function()
+--   if input.Text == licenciaValida then
+--        licensePage.Visible = false
         mainContainer.Visible = true
         showContent("Main")
--- Control de teclado (solo H para mostrar/ocultar el mainContainer)
+--   else
+--        local errorMsg = Instance.new("TextLabel", licensePage)
+ --       errorMsg.Text = "LICENCIA INCORRECTA"
+--        errorMsg.TextColor3 = Color3.fromRGB(255, 50, 50)
+--        errorMsg.Size = UDim2.new(1, -40, 0, 20)
+--        errorMsg.Position = UDim2.new(0, 20, 0, 170)
+--        errorMsg.Font = Enum.Font.GothamBold
+--        task.delay(2, function() errorMsg:Destroy() end)
+--    end
+--end)
+
+-- Control de teclado
 game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
     if not gameProcessed then
-        if input.KeyCode == Enum.KeyCode.H then
+        if input.KeyCode == Enum.KeyCode.RightShift and not licensePage.Visible then
+            mainContainer.Visible = not mainContainer.Visible
+        elseif input.KeyCode == Enum.KeyCode.H and not licensePage.Visible then
             mainContainer.Visible = not mainContainer.Visible
         end
     end
