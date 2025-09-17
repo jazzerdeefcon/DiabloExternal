@@ -26,6 +26,21 @@ mainContainer.BorderColor3 = Color3.fromRGB(106, 13, 173)
 mainContainer.Visible = true
 mainContainer.Name = "MainContainer"
 
+-- Botón "X" para cerrar el menú
+local closeBtn = Instance.new("TextButton", mainContainer)
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(1, -35, 0, 5) -- Esquina superior derecha
+closeBtn.Text = "X"
+closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 18
+closeBtn.ZIndex = 2
+
+closeBtn.MouseButton1Click:Connect(function()
+    gui:Destroy() -- Cierra todo el cheat
+end)
+
 -- Función para hacer arrastrable el menú
 local function makeDraggable(frame)
     frame.InputBegan:Connect(function(input)
