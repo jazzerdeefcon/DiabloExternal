@@ -465,6 +465,8 @@ local function showContent(contentName)
 end
 
 
+        mainContainer.Visible = true
+        showContent("Main")
 -- Control de teclado (solo H para mostrar/ocultar el mainContainer)
 game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
     if not gameProcessed then
