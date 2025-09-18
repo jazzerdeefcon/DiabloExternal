@@ -22,31 +22,27 @@ function menu.init(core)
 
     -- Bordes redondeados
     local uicorner = Instance.new("UICorner")
-    uicorner.CornerRadius = UDim.new(0, 10) -- 10 px de radio
+    uicorner.CornerRadius = UDim.new(0, 10)
     uicorner.Parent = mainFrame
 
     local uistroke = Instance.new("UIStroke")
     uistroke.Thickness = 2
-    uistroke.Color = Color3.fromRGB(255, 0, 0) -- borde rojo
+    uistroke.Color = Color3.fromRGB(255, 0, 0)
     uistroke.Parent = mainFrame
-
-
 
     -- Variable para controlar visibilidad
     local isVisible = true
-
--- Función para alternar visibilidad
     local function toggleMenu()
-    isVisible = not isVisible
-    mainFrame.Visible = isVisible
+        isVisible = not isVisible
+        mainFrame.Visible = isVisible
     end
 
--- Conexión al teclado
+    -- Tecla H para mostrar/ocultar
     local UserInputService = game:GetService("UserInputService")
     UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-    if not gameProcessedEvent and input.KeyCode == Enum.KeyCode.H then
-        toggleMenu()
-    end
+        if not gameProcessedEvent and input.KeyCode == Enum.KeyCode.H then
+            toggleMenu()
+        end
     end)
 
     -- Logo circular
@@ -57,21 +53,19 @@ function menu.init(core)
     logo.Image = "rbxassetid://120947319794902"
     logo.ScaleType = Enum.ScaleType.Fit
 
--- Título del menú (centrado en la parte inferior)
+    -- Texto inferior "Diablo External"
     local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, 0, 0, 30)                    -- ancho completo del mainFrame
-    title.Position = UDim2.new(0, 0, 1, -35)               -- parte inferior, offset hacia arriba
+    title.Size = UDim2.new(1, 0, 0, 30)
+    title.Position = UDim2.new(0, 0, 1, -35)
     title.BackgroundTransparency = 1
     title.Text = "Diablo External"
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.TextTransparency = 0.4
     title.TextSize = 16
-    --title.Font = Enum.Font.SourceSansBold
     title.Font = Enum.Font.GothamSemibold
-    title.TextXAlignment = Enum.TextXAlignment.Center      -- centrado horizontal
-    title.TextYAlignment = Enum.TextYAlignment.Center      -- centrado vertical
+    title.TextXAlignment = Enum.TextXAlignment.Center
+    title.TextYAlignment = Enum.TextYAlignment.Center
     title.Parent = mainFrame
-
 
     -- Botón cerrar (X)
     local closeBtn = Instance.new("TextButton")
@@ -84,78 +78,73 @@ function menu.init(core)
     closeBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
     closeBtn.BorderSizePixel = 0
     closeBtn.Parent = mainFrame
-
     closeBtn.MouseButton1Click:Connect(function()
         gui:Destroy()
     end)
 
--- ===== Función auxiliar para crear botones estilizados =====
+    -- Función auxiliar para crear botones estilizados
     local function createButton(name, yOffset, modulePath, parentFrame, loadModuleFunc)
-    local btnWidth, btnHeight = 240, 30
-    local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(0, btnWidth, 0, btnHeight)
-    btn.Position = UDim2.new(0.5, -btnWidth/2, 0, yOffset) -- centrado horizontal
-    btn.Text = name
-    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    btn.TextSize = 14
-    btn.Font = Enum.Font.SourceSansBold
-    btn.BorderSizePixel = 0
-    btn.Parent = parentFrame
+        local btnWidth, btnHeight = 240, 30
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0, btnWidth, 0, btnHeight)
+        btn.Position = UDim2.new(0.5, -btnWidth/2, 0, yOffset)
+        btn.Text = name
+        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        btn.TextSize = 14
+        btn.Font = Enum.Font.SourceSansBold
+        btn.BorderSizePixel = 0
+        btn.Parent = parentFrame
 
-    -- Esquinas redondeadas
-    local corner = Instance.new("UICorner")
-    corner.CornerRadius = UDim.new(0, 6)
-    corner.Parent = btn
+        local corner = Instance.new("UICorner")
+        corner.CornerRadius = UDim.new(0, 6)
+        corner.Parent = btn
 
-    -- Borde rojo
-    local stroke = Instance.new("UIStroke")
-    stroke.Thickness = 2
-    stroke.Color = Color3.fromRGB(255, 0, 0)
-    stroke.Parent = btn
+        local stroke = Instance.new("UIStroke")
+        stroke.Thickness = 2
+        stroke.Color = Color3.fromRGB(255, 0, 0)
+        stroke.Parent = btn
 
-    -- Degradado de fondo
-    local gradient = Instance.new("UIGradient")
-    gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 50, 50)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 0, 0))
-    }
-    gradient.Rotation = 45
-    gradient.Parent = btn
-
-    -- Efecto hover
-    btn.MouseEnter:Connect(function()
-        gradient.Color = ColorSequence.new{
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 80, 80)),
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 0, 0))
-        }
-    end)
-
-    btn.MouseLeave:Connect(function()
+        local gradient = Instance.new("UIGradient")
         gradient.Color = ColorSequence.new{
             ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 50, 50)),
             ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 0, 0))
         }
-    end)
+        gradient.Rotation = 45
+        gradient.Parent = btn
 
-    -- Conectar botón al módulo
-    btn.MouseButton1Click:Connect(function()
-        local mod = loadModuleFunc(modulePath)
-        if mod and mod.init then
-            mod.init()
-        else
-            warn("No se pudo cargar el módulo: " .. modulePath)
-        end
-    end)
+        btn.MouseEnter:Connect(function()
+            gradient.Color = ColorSequence.new{
+                ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 80, 80)),
+                ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 0, 0))
+            }
+        end)
+
+        btn.MouseLeave:Connect(function()
+            gradient.Color = ColorSequence.new{
+                ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 50, 50)),
+                ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 0, 0))
+            }
+        end)
+
+        btn.MouseButton1Click:Connect(function()
+            local mod = loadModuleFunc(modulePath)
+            if mod and mod.init then
+                mod.init()
+            else
+                warn("No se pudo cargar el módulo: " .. modulePath)
+            end
+        end)
+    end
+
+    -- Crear botones debajo del logo
+    local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
+    local spacing = 40
+    createButton("Aimbot", startY + spacing * 0, "modules/handlers/aimbot.lua", mainFrame, core.loadModule)
+    createButton("ESP", startY + spacing * 1, "modules/handlers/esp.lua", mainFrame, core.loadModule)
+    createButton("Noclip", startY + spacing * 2, "modules/handlers/noclip.lua", mainFrame, core.loadModule)
+    createButton("Velocidad", startY + spacing * 3, "modules/handlers/speed.lua", mainFrame, core.loadModule)
+    createButton("Teleport", startY + spacing * 4, "modules/handlers/teleport.lua", mainFrame, core.loadModule)
+    createButton("Volar", startY + spacing * 5, "modules/handlers/fly.lua", mainFrame, core.loadModule)
 end
-
--- ===== Crear botones debajo del logo =====
-local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
-local spacing = 40
-createButton("Aimbot", startY + spacing * 0, "modules/handlers/aimbot.lua", mainFrame, core.loadModule)
-createButton("ESP", startY + spacing * 1, "modules/handlers/esp.lua", mainFrame, core.loadModule)
-createButton("Noclip", startY + spacing * 2, "modules/handlers/noclip.lua", mainFrame, core.loadModule)
-createButton("Velocidad", startY + spacing * 3, "modules/handlers/speed.lua", mainFrame, core.loadModule)
-createButton("Teleport", startY + spacing * 4, "modules/handlers/teleport.lua", mainFrame, core.loadModule)
-createButton("Volar", startY + spacing * 5, "modules/handlers/fly.lua", mainFrame, core.loadModule)
 
 return menu
