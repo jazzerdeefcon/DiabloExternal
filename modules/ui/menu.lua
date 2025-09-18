@@ -89,10 +89,8 @@ function menu.init(core)
         gui:Destroy()
     end)
 
-  -- ===== Función auxiliar para crear botones estilizados =====
--- parentFrame: frame donde se colocará el botón
--- loadModuleFunc: función para cargar módulos
-    local function createButton(name, yOffset, modulePath, parentFrame, loadModuleFunc)
+-- ===== Función auxiliar para crear botones estilizados =====
+local function createButton(name, yOffset, modulePath, parentFrame, loadModuleFunc)
     local btnWidth, btnHeight = 240, 30
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(0, btnWidth, 0, btnHeight)
@@ -102,8 +100,6 @@ function menu.init(core)
     btn.TextSize = 14
     btn.Font = Enum.Font.SourceSansBold
     btn.BorderSizePixel = 0
-    btn.BackgroundTransparency = 0
-    btn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
     btn.Parent = parentFrame
 
     -- Esquinas redondeadas
@@ -143,26 +139,24 @@ function menu.init(core)
 
     -- Conectar botón al módulo
     btn.MouseButton1Click:Connect(function()
-        if loadModuleFunc then
-            local mod = loadModuleFunc(modulePath)
-            if mod and mod.init then
-                mod.init()
-            else
-                warn("No se pudo cargar el módulo: " .. modulePath)
-            end
+        local mod = loadModuleFunc(modulePath)
+        if mod and mod.init then
+            mod.init()
+        else
+            warn("No se pudo cargar el módulo: " .. modulePath)
         end
     end)
 end
 
+-- ===== Crear botones debajo del logo =====
+local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
+local spacing = 40
+createButton("Aimbot", startY + spacing * 0, "modules/handlers/aimbot.lua", mainFrame, core.loadModule)
+createButton("ESP", startY + spacing * 1, "modules/handlers/esp.lua", mainFrame, core.loadModule)
+createButton("Noclip", startY + spacing * 2, "modules/handlers/noclip.lua", mainFrame, core.loadModule)
+createButton("Velocidad", startY + spacing * 3, "modules/handlers/speed.lua", mainFrame, core.loadModule)
+createButton("Teleport", startY + spacing * 4, "modules/handlers/teleport.lua", mainFrame, core.loadModule)
+createButton("Volar", startY + spacing * 5, "modules/handlers/fly.lua", mainFrame, core.loadModule)
 
--- ===== Crear botones =====
-    local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
-    local spacing = 40
-    createButton("Aimbot", startY + spacing * 0, "modules/handlers/aimbot.lua", mainFrame, core.loadModule)
-    createButton("ESP", startY + spacing * 1, "modules/handlers/esp.lua", mainFrame, core.loadModule)
-    createButton("Noclip", startY + spacing * 2, "modules/handlers/noclip.lua", mainFrame, core.loadModule)
-    createButton("Velocidad", startY + spacing * 3, "modules/handlers/speed.lua", mainFrame, core.loadModule)
-    createButton("Teleport", startY + spacing * 4, "modules/handlers/teleport.lua", mainFrame, core.loadModule)
-    createButton("Volar", startY + spacing * 5, "modules/handlers/fly.lua", mainFrame, core.loadModule)
 
 return menu
