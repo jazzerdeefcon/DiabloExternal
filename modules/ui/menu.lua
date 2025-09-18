@@ -20,6 +20,11 @@ function menu.init(core)
     mainFrame.Draggable = true
     mainFrame.Parent = gui
 
+    -- Bordes redondeados
+    local uicorner = Instance.new("UICorner")
+    uicorner.CornerRadius = UDim.new(0, 10) -- 10 px de radio
+    uicorner.Parent = mainFrame
+
     -- Variable para controlar visibilidad
     local isVisible = true
 
