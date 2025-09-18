@@ -20,6 +20,23 @@ function menu.init(core)
     mainFrame.Draggable = true
     mainFrame.Parent = gui
 
+    -- Variable para controlar visibilidad
+    local isVisible = true
+
+-- Función para alternar visibilidad
+    local function toggleMenu()
+    isVisible = not isVisible
+    mainFrame.Visible = isVisible
+    end
+
+-- Conexión al teclado
+    local UserInputService = game:GetService("UserInputService")
+    UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+    if not gameProcessedEvent and input.KeyCode == Enum.KeyCode.H then
+        toggleMenu()
+    end
+    end)
+
     -- Logo circular
     local logo = Instance.new("ImageLabel", mainFrame)
     logo.Size = UDim2.new(0, 80, 0, 80)
