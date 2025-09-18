@@ -91,7 +91,7 @@ function menu.init(core)
 
     -- ===== Función auxiliar para crear botones =====
     local function createButton(name, yOffset, modulePath)
-        local btnWidth, btnHeight = 140, 30
+        local btnWidth, btnHeight = 240, 30
         local btn = Instance.new("TextButton")
         btn.Size = UDim2.new(0, btnWidth, 0, btnHeight)
         btn.Position = UDim2.new(0, (mainFrame.Size.X.Offset - btnWidth)/2, 0, yOffset)
