@@ -27,7 +27,7 @@ local function showMessage(msg, color, duration)
     gui.Parent = player:WaitForChild("PlayerGui")
 
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(0.5, 0, 0, 50)
+    label.Size = UDim2.new(0.5, 0, 0, 20)
     label.Position = UDim2.new(0.25, 0, 0, 100)
     label.BackgroundColor3 = color or Color3.fromRGB(25, 25, 25)
     label.TextColor3 = Color3.fromRGB(255, 255, 255)
