@@ -64,7 +64,7 @@ function menu.init(loadModuleFunc)
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.TextTransparency = 0.4
     title.TextSize = 16
-    title.Font = Enum.Font.GothamSemibold
+    title.Font = Enum.Font.SciFi
     title.TextXAlignment = Enum.TextXAlignment.Center
     title.TextYAlignment = Enum.TextYAlignment.Center
     title.Parent = mainFrame
@@ -123,8 +123,8 @@ function menu.init(loadModuleFunc)
     btn.Text = name
     btn.TextColor3 = Color3.fromRGB(255, 255, 255) -- texto blanco
     btn.TextSize = 16
-    btn.Font = Enum.Font.SciFi
-    --btn.Font = Enum.Font.FredokaOne
+    --btn.Font = Enum.Font.SciFi
+    btn.Font = Enum.Font.FredokaOne
     --btn.Font = Enum.Font.Fondamento
     btn.BackgroundTransparency = 1 -- transparente para mostrar el fondo
     btn.BorderSizePixel = 0
