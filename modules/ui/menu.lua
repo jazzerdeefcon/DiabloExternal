@@ -15,7 +15,7 @@ function menu.init(core)
     mainFrame.Size = UDim2.new(0, 300, 0, 200)
     mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
     mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    mainFrame.BackgroundTransparency = 0.7
+    --mainFrame.BackgroundTransparency = 0
     mainFrame.Active = true
     mainFrame.Draggable = true
     mainFrame.Parent = gui
