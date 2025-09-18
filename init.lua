@@ -113,8 +113,8 @@ local function loadModule(path)
     end)
 
     if not success then
-        warn("Error al cargar módulo: " .. , result)
-        showMessage("⚠ Error al cargar módulo: " .. , Color3.fromRGB(255,100,0), 3)
+        warn("Error al cargar módulo: " .. path, result)
+        showMessage("⚠ Error cargando módulo: " .. path, Color3.fromRGB(255,100,0), 3)
         return nil
     end
 
