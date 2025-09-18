@@ -32,7 +32,7 @@ function menu.init(core)
     local title = Instance.new("TextLabel")
     title.Size = UDim2.new(1, -30, 0, 30)
     title.Position = UDim2.new(0, 5, 0, 5)
-    title.BackgroundTransparency = 0.2
+    -- title.BackgroundTransparency = 0.2
     title.Text = "Diablo External"
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.TextSize = 16
