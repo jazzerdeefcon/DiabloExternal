@@ -15,11 +15,12 @@ function menu.init(core)
     mainFrame.Size = UDim2.new(0, 300, 0, 200)
     mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
     mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    mainFrame.BackgroundTransparency = 0.2
     mainFrame.Active = true
     mainFrame.Draggable = true
     mainFrame.Parent = gui
 
-    -- Logo en el men�
+    -- Logo en el menu
     local logo = Instance.new("ImageLabel", mainFrame)
     logo.Size = UDim2.new(0, 80, 0, 80)                 -- tamaño del logo
     logo.Position = UDim2.new(0.5, -40, 0, 40)          -- centrado horizontal, 40px desde arriba
