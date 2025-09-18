@@ -93,7 +93,7 @@ function menu.init(core)
         btn.Position = UDim2.new(0, (mainFrame.Size.X.Offset - btnWidth)/2, 0, yOffset)
         btn.Text = name
         btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-        btn.BackgroundColor3 = Color3.fromRGB(0, 120, 255)
+        btn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
         btn.Font = Enum.Font.SourceSansBold
         btn.TextSize = 14
         btn.BorderSizePixel = 0
