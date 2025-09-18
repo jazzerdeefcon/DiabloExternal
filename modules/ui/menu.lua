@@ -116,17 +116,17 @@ function menu.init(loadModuleFunc)
     gradient.Rotation = 45
     gradient.Parent = bg
 
-    -- TextButton con texto encima del fondo
+    -- TextButton encima del fondo
     local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(1, 0, 1, 0)
-    btn.Position = UDim2.new(0, 0, 0, 0)
+    btn.Size = UDim2.new(0, btnWidth, 0, btnHeight)
+    btn.Position = UDim2.new(0.5, -btnWidth/2, 0, yOffset)
     btn.Text = name
-    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255) -- texto blanco
     btn.TextSize = 14
     btn.Font = Enum.Font.SourceSansBold
-    btn.BackgroundTransparency = 1
+    btn.BackgroundTransparency = 1 -- transparente para mostrar el fondo
     btn.BorderSizePixel = 0
-    btn.Parent = bg
+    btn.Parent = parentFrame -- ⚠️ poner como hermano de bg
 
     -- Efecto hover
     btn.MouseEnter:Connect(function()
