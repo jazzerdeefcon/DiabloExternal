@@ -1,81 +1,51 @@
--- init.lua
--- Punto de entrada público con fecha de expiración embebida
--- Muestra mensajes visuales en pantalla para verificar estado
+-- modules/ui/menu.lua
+-- Menu principal de DiabloExternal
 
--- ======================
--- Configuración
--- ======================
-local EXPIRATION_DATE = "2025-09-30" -- AAAA-MM-DD
+local menu = {}
 
--- ======================
--- Función para parsear fecha
--- ======================
-local function parseDate(str)
-    local y, m, d = string.match(str, "(%d+)%-(%d+)%-(%d+)")
-    return os.time({year = y, month = m, day = d, hour = 0})
-end
-
--- ======================
--- Función para mostrar mensaje en pantalla
--- ======================
-local function showMessage(msg, color)
+function menu.init(core)
     local player = game:GetService("Players").LocalPlayer
     local gui = Instance.new("ScreenGui")
-    gui.Name = "DiabloMessage"
+    gui.Name = "DiabloMenu"
     gui.ResetOnSpawn = false
     gui.Parent = player:WaitForChild("PlayerGui")
 
-    local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(0.5, 0, 0, 50)
-    label.Position = UDim2.new(0.25, 0, 0, 100)
-    label.BackgroundColor3 = color or Color3.fromRGB(50, 50, 50)
-    label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    label.Text = msg
-    label.TextSize = 18
-    label.Font = Enum.Font.SourceSansBold
-    label.Parent = gui
-end
+    -- Marco principal
+    local mainFrame = Instance.new("Frame")
+    mainFrame.Size = UDim2.new(0, 300, 0, 200)
+    mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    mainFrame.Active = true
+    mainFrame.Draggable = true
+    mainFrame.Parent = gui
 
--- ======================
--- Verificación de licencia/fecha
--- ======================
-local now = os.time()
-local expire = parseDate(EXPIRATION_DATE)
+    -- Titulo
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, -30, 0, 30)
+    title.Position = UDim2.new(0, 5, 0, 5)
+    title.BackgroundTransparency = 1
+    title.Text = "?? Diablo External ??"
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextSize = 16
+    title.Font = Enum.Font.SourceSansBold
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Parent = mainFrame
 
-if now > expire then
-    showMessage("❌ Este script ha expirado. Contacta al desarrollador.", Color3.fromRGB(200,0,0))
-    return
-else
-    showMessage("✅ Licencia válida. Cargando módulos...", Color3.fromRGB(0,200,0))
-end
+    -- Boton cerrar (X)
+    local closeBtn = Instance.new("TextButton")
+    closeBtn.Size = UDim2.new(0, 25, 0, 25)
+    closeBtn.Position = UDim2.new(1, -30, 0, 5)
+    closeBtn.Text = "X"
+    closeBtn.TextColor3 = Color3.fromRGB(255, 100, 100)
+    closeBtn.TextSize = 14
+    closeBtn.Font = Enum.Font.SourceSansBold
+    closeBtn.Parent = mainFrame
 
--- ======================
--- Función para cargar módulos desde GitHub
--- ======================
-local function loadModule(path)
-    local url = "https://raw.githubusercontent.com/jazzerdeefcon/DiabloExternal/main/" .. path
-    local success, result = pcall(function()
-        return loadstring(game:HttpGet(url))()
+    closeBtn.MouseButton1Click:Connect(function()
+        gui:Destroy()
     end)
 
-    if not success then
-        warn("Error al cargar módulo: " .. path, result)
-        showMessage("⚠ Error cargando módulo: " .. path, Color3.fromRGB(255,100,0))
-        return nil
-    end
-
-    return result
+    -- Aqui mas adelante agregaremos botones (aimbot, esp, noclip, etc.)
 end
 
--- ======================
--- Cargar menú principal
--- ======================
-local menu = loadModule("modules/ui/menu.lua")
-
-if menu and menu.init then
-    menu.init()
-    showMessage("✅ Menú cargado correctamente", Color3.fromRGB(0,200,0))
-else
-    warn("El menú no se pudo inicializar")
-    showMessage("⚠ El menú no se pudo inicializar", Color3.fromRGB(255,100,0))
-end
+return menu

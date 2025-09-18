@@ -1,13 +1,14 @@
 -- init.lua
--- Punto de entrada publico con fecha de expiracion embebida
+-- Punto de entrada público con fecha de expiración embebida
+-- Muestra mensajes visuales en pantalla para verificar estado
 
 -- ======================
--- Configuracion
+-- Configuración
 -- ======================
 local EXPIRATION_DATE = "2025-09-30" -- AAAA-MM-DD
 
 -- ======================
--- Funcion para parsear fecha
+-- Función para parsear fecha
 -- ======================
 local function parseDate(str)
     local y, m, d = string.match(str, "(%d+)%-(%d+)%-(%d+)")
@@ -15,18 +16,41 @@ local function parseDate(str)
 end
 
 -- ======================
--- Verificacion de licencia/fecha
+-- Función para mostrar mensaje en pantalla
+-- ======================
+local function showMessage(msg, color)
+    local player = game:GetService("Players").LocalPlayer
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "DiabloMessage"
+    gui.ResetOnSpawn = false
+    gui.Parent = player:WaitForChild("PlayerGui")
+
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(0.5, 0, 0, 50)
+    label.Position = UDim2.new(0.25, 0, 0, 100)
+    label.BackgroundColor3 = color or Color3.fromRGB(50, 50, 50)
+    label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    label.Text = msg
+    label.TextSize = 18
+    label.Font = Enum.Font.SourceSansBold
+    label.Parent = gui
+end
+
+-- ======================
+-- Verificación de licencia/fecha
 -- ======================
 local now = os.time()
 local expire = parseDate(EXPIRATION_DATE)
 
 if now > expire then
-    warn("Este script ha expirado. Contacta al desarrollador para renovar acceso.")
+    showMessage("❌ Este script ha expirado. Contacta al desarrollador.", Color3.fromRGB(200,0,0))
     return
+else
+    showMessage("✅ Licencia válida. Cargando módulos...", Color3.fromRGB(0,200,0))
 end
 
 -- ======================
--- Funcion para cargar modulos desde GitHub
+-- Función para cargar módulos desde GitHub
 -- ======================
 local function loadModule(path)
     local url = "https://raw.githubusercontent.com/jazzerdeefcon/DiabloExternal/main/" .. path
@@ -35,7 +59,8 @@ local function loadModule(path)
     end)
 
     if not success then
-        warn("Error al cargar modulo: " .. path, result)
+        warn("Error al cargar módulo: " .. path, result)
+        showMessage("⚠ Error cargando módulo: " .. path, Color3.fromRGB(255,100,0))
         return nil
     end
 
@@ -43,12 +68,14 @@ local function loadModule(path)
 end
 
 -- ======================
--- Cargar menu principal
+-- Cargar menú principal
 -- ======================
 local menu = loadModule("modules/ui/menu.lua")
 
 if menu and menu.init then
     menu.init()
+    showMessage("✅ Menú cargado correctamente", Color3.fromRGB(0,200,0))
 else
-    warn("El menu no se pudo inicializar")
+    warn("El menú no se pudo inicializar")
+    showMessage("⚠ El menú no se pudo inicializar", Color3.fromRGB(255,100,0))
 end
