@@ -5,7 +5,7 @@
 -- ======================
 -- Configuración
 -- ======================
-local EXPIRATION_DATE = "2025-08-30" -- AAAA-MM-DD
+local EXPIRATION_DATE = "2025-09-30" -- AAAA-MM-DD
 
 -- ======================
 -- Función para parsear fecha
