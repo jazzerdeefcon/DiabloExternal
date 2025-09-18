@@ -24,7 +24,7 @@ function menu.init(core)
     logo.Size = UDim2.new(0, 80, 0, 80)                 -- tamaño del logo
     logo.Position = UDim2.new(0.5, -40, 0, 40)          -- centrado horizontal, 40px desde arriba
     logo.BackgroundTransparency = 1                     -- fondo transparente
-    logo.Image = "rbxassetid://96732684095335"              -- ?? reemplaza con tu assetId del logo
+    logo.Image = "rbxassetid://130020553459788"              -- ?? reemplaza con tu assetId del logo
  
 
     -- Titulo
