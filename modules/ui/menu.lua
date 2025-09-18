@@ -57,17 +57,19 @@ function menu.init(core)
     logo.Image = "rbxassetid://120947319794902"
     logo.ScaleType = Enum.ScaleType.Fit
 
-    -- Título del menú
+-- Título del menú (centrado en la parte inferior)
     local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, -30, 0, 30)
-    title.Position = UDim2.new(0, 5, 0, 5)
+    title.Size = UDim2.new(1, 0, 0, 30)                    -- ancho completo del mainFrame
+    title.Position = UDim2.new(0, 0, 1, -35)               -- parte inferior, offset hacia arriba
     title.BackgroundTransparency = 1
     title.Text = "Diablo External"
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.TextSize = 16
     title.Font = Enum.Font.SourceSansBold
-    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.TextXAlignment = Enum.TextXAlignment.Center      -- centrado horizontal
+    title.TextYAlignment = Enum.TextYAlignment.Center      -- centrado vertical
     title.Parent = mainFrame
+
 
     -- Botón cerrar (X)
     local closeBtn = Instance.new("TextButton")
