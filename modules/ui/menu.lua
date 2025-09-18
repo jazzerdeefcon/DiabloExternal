@@ -157,12 +157,12 @@ end
     -- ===== Crear botones debajo del logo =====
     local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
     local spacing = 40
-    createButton("Aimbot", startY + spacing * 0, "modules/handlers/aimbot.lua", mainFrame, loadModuleFunc)
+    createButton("AIMBOT", startY + spacing * 0, "modules/handlers/aimbot.lua", mainFrame, loadModuleFunc)
     createButton("ESP", startY + spacing * 1, "modules/handlers/esp.lua", mainFrame, loadModuleFunc)
-    createButton("Noclip", startY + spacing * 2, "modules/handlers/noclip.lua", mainFrame, loadModuleFunc)
-    createButton("Velocidad", startY + spacing * 3, "modules/handlers/speed.lua", mainFrame, loadModuleFunc)
-    createButton("Teleport", startY + spacing * 4, "modules/handlers/teleport.lua", mainFrame, loadModuleFunc)
-    createButton("Volar", startY + spacing * 5, "modules/handlers/fly.lua", mainFrame, loadModuleFunc)
+    createButton("NOCLIP", startY + spacing * 2, "modules/handlers/noclip.lua", mainFrame, loadModuleFunc)
+    createButton("SPEED", startY + spacing * 3, "modules/handlers/speed.lua", mainFrame, loadModuleFunc)
+    createButton("TELEPORT", startY + spacing * 4, "modules/handlers/teleport.lua", mainFrame, loadModuleFunc)
+    createButton("FLY", startY + spacing * 5, "modules/handlers/fly.lua", mainFrame, loadModuleFunc)
 end
 
 return menu
