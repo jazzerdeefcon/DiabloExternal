@@ -122,7 +122,7 @@ function menu.init(loadModuleFunc)
     btn.Position = UDim2.new(0.5, -btnWidth/2, 0, yOffset)
     btn.Text = name
     btn.TextColor3 = Color3.fromRGB(255, 255, 255) -- texto blanco
-    btn.TextSize = 14
+    btn.TextSize = 16
     --btn.Font = Enum.Font.SciFi
     --btn.Font = Enum.Font.FredokaOne
     btn.Font = Enum.Font.Fondamento
