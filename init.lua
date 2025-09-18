@@ -27,13 +27,25 @@ local function showMessage(msg, color, duration)
     gui.Parent = player:WaitForChild("PlayerGui")
 
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(0.4, 0, 0, 40)
-    label.Position = UDim2.new(0.4, 0, 0, 100)
     label.BackgroundColor3 = color or Color3.fromRGB(25, 25, 25)
     label.TextColor3 = Color3.fromRGB(255, 255, 255)
     label.Text = msg
     label.TextSize = 18
     label.Font = Enum.Font.SourceSansBold
+    label.TextWrapped = true
+    label.TextScaled = false
+    label.AutomaticSize = Enum.AutomaticSize.XY -- Se ajusta automáticamente en X e Y
+    label.Position = UDim2.new(0.5, 0, 0, 100)
+    label.AnchorPoint = Vector2.new(0.5, 0) -- centra el label horizontalmente
+
+    -- Agregar padding interno
+    local padding = Instance.new("UIPadding")
+    padding.PaddingLeft = UDim.new(0, 10)
+    padding.PaddingRight = UDim.new(0, 10)
+    padding.PaddingTop = UDim.new(0, 5)
+    padding.PaddingBottom = UDim.new(0, 5)
+    padding.Parent = label
+
     label.Parent = gui
 
     -- Destruir el mensaje automáticamente después de duration segundos
@@ -43,6 +55,7 @@ local function showMessage(msg, color, duration)
         end
     end)
 end
+
 
 -- ======================
 -- Verificación de licencia/fecha
