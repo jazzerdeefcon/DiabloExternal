@@ -64,8 +64,10 @@ function menu.init(core)
     title.BackgroundTransparency = 1
     title.Text = "Diablo External"
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextTransparency = 0.4
     title.TextSize = 16
-    title.Font = Enum.Font.SourceSansBold
+    --title.Font = Enum.Font.SourceSansBold
+    title.Font = Enum.Font.GothamSemibold
     title.TextXAlignment = Enum.TextXAlignment.Center      -- centrado horizontal
     title.TextYAlignment = Enum.TextYAlignment.Center      -- centrado vertical
     title.Parent = mainFrame
