@@ -49,7 +49,7 @@ function menu.init(core)
     closeBtn.TextSize = 14
     closeBtn.Font = Enum.Font.SourceSansBold
     closeBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- fondo rojo
-    closeBtn.BackgroundTransparency = 0 -- fondo totalmente visible
+    --closeBtn.BackgroundTransparency = 0 -- fondo totalmente visible
     closeBtn.BorderSizePixel = 0 -- opcional: quitar borde gris
     
     closeBtn.Parent = mainFrame
