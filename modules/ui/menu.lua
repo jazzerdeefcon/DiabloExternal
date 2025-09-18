@@ -25,6 +25,13 @@ function menu.init(core)
     uicorner.CornerRadius = UDim.new(0, 10) -- 10 px de radio
     uicorner.Parent = mainFrame
 
+    local uistroke = Instance.new("UIStroke")
+    uistroke.Thickness = 2
+    uistroke.Color = Color3.fromRGB(255, 255, 255) -- borde blanco
+    uistroke.Parent = mainFrame
+
+
+
     -- Variable para controlar visibilidad
     local isVisible = true
 
