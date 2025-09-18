@@ -60,7 +60,7 @@ function menu.init(loadModuleFunc)
     title.Size = UDim2.new(1, 0, 0, 30)
     title.Position = UDim2.new(0, 0, 1, -35)
     title.BackgroundTransparency = 1
-    title.Text = "Diablo External"
+    title.Text = "Diablo External V.1.0" 
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.TextTransparency = 0.4
     title.TextSize = 16
