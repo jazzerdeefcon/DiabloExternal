@@ -123,7 +123,7 @@ function menu.init(loadModuleFunc)
     btn.Text = name
     btn.TextColor3 = Color3.fromRGB(255, 255, 255) -- texto blanco
     btn.TextSize = 14
-    btn.Font = Enum.Font.Anton
+    btn.Font = Enum.Font.Arcade
     btn.BackgroundTransparency = 1 -- transparente para mostrar el fondo
     btn.BorderSizePixel = 0
     btn.Parent = parentFrame -- ⚠️ poner como hermano de bg
