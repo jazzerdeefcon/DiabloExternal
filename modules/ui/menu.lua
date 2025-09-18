@@ -45,9 +45,13 @@ function menu.init(core)
     closeBtn.Size = UDim2.new(0, 25, 0, 25)
     closeBtn.Position = UDim2.new(1, -30, 0, 5)
     closeBtn.Text = "X"
-    closeBtn.TextColor3 = Color3.fromRGB(255, 100, 100)
+    closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     closeBtn.TextSize = 14
     closeBtn.Font = Enum.Font.SourceSansBold
+    closeBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- fondo rojo
+    closeBtn.BackgroundTransparency = 0 -- fondo totalmente visible
+    closeBtn.BorderSizePixel = 0 -- opcional: quitar borde gris
+    
     closeBtn.Parent = mainFrame
 
     closeBtn.MouseButton1Click:Connect(function()
