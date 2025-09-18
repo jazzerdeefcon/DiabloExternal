@@ -116,7 +116,7 @@ function menu.init(loadModuleFunc)
         }
         gradient.Rotation = 45
         gradient.Parent = btn
-
+        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
         -- Efecto hover
         btn.MouseEnter:Connect(function()
             gradient.Color = ColorSequence.new{
