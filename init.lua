@@ -18,7 +18,8 @@ end
 -- ======================
 -- Función para mostrar mensaje en pantalla
 -- ======================
-local function showMessage(msg, color)
+local function showMessage(msg, color, duration)
+    duration = duration or 3 -- duración por defecto en segundos
     local player = game:GetService("Players").LocalPlayer
     local gui = Instance.new("ScreenGui")
     gui.Name = "DiabloMessage"
@@ -34,8 +35,12 @@ local function showMessage(msg, color)
     label.TextSize = 18
     label.Font = Enum.Font.SourceSansBold
     label.Parent = gui
-end
 
+    -- Destruir el mensaje automáticamente después de duration segundos
+    task.delay(duration, function()
+        gui:Destroy()
+    end)
+end
 -- ======================
 -- Verificación de licencia/fecha
 -- ======================
