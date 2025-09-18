@@ -81,7 +81,7 @@ end
 local menu = loadModule("modules/ui/menu.lua")
 
 if menu and menu.init then
-    menu.init()
+    menu.init(loadModule) -- ✅ pasamos la función loadModule
     showMessage("✅ Menú cargado correctamente", Color3.fromRGB(0,200,0), 2)
 else
     warn("El menú no se pudo inicializar")
