@@ -59,6 +59,37 @@ function menu.init(core)
     end)
 
     -- Aqui mas adelante agregaremos botones (aimbot, esp, noclip, etc.)
+
+    -- ===== Función auxiliar para crear botones =====
+    local function createButton(name, yOffset, modulePath)
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0, 120, 0, 30)
+        btn.Position = UDim2.new(0, 20, 0, yOffset)
+        btn.Text = name
+        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        btn.BackgroundColor3 = Color3.fromRGB(0, 120, 255)
+        btn.Font = Enum.Font.SourceSansBold
+        btn.TextSize = 14
+        btn.BorderSizePixel = 0
+        btn.Parent = mainFrame
+
+        btn.MouseButton1Click:Connect(function()
+            local mod = core.loadModule(modulePath)
+            if mod and mod.init then
+                mod.init()
+            else
+                warn("No se pudo cargar el módulo: " .. modulePath)
+            end
+        end)
+    end
+
+    -- ===== Crear botones =====
+    createButton("Aimbot", 50, "modules/handlers/aimbot.lua")
+    createButton("ESP", 90, "modules/handlers/esp.lua")
+    createButton("Noclip", 130, "modules/handlers/noclip.lua")
+    createButton("Velocidad", 170, "modules/handlers/speed.lua")
+    createButton("Teleport", 210, "modules/handlers/teleport.lua")
+    createButton("Volar", 250, "modules/handlers/fly.lua")
 end
 
 return menu
