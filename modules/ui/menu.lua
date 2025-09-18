@@ -85,28 +85,16 @@ function menu.init(loadModuleFunc)
     end)
 
    -- ===== Función auxiliar para crear botones estilizados =====
-local function createButton(name, yOffset, modulePath, parentFrame, loadFunc)
+    local function createButton(name, yOffset, modulePath, parentFrame, loadFunc)
     local btnWidth, btnHeight = 240, 30
 
-    -- Botón principal (TextButton con fondo transparente)
-    local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(0, btnWidth, 0, btnHeight)
-    btn.Position = UDim2.new(0.5, -btnWidth/2, 0, yOffset)
-    btn.Text = name
-    btn.TextColor3 = Color3.fromRGB(255, 255, 255) -- texto blanco
-    btn.TextSize = 14
-    btn.Font = Enum.Font.SourceSansBold
-    btn.BackgroundTransparency = 1 -- fondo transparente
-    btn.BorderSizePixel = 0
-    btn.Parent = parentFrame
-
-    -- Frame hijo para el fondo y efectos
+    -- Frame de fondo
     local bg = Instance.new("Frame")
-    bg.Size = UDim2.new(1, 0, 1, 0)
-    bg.Position = UDim2.new(0, 0, 0, 0)
+    bg.Size = UDim2.new(0, btnWidth, 0, btnHeight)
+    bg.Position = UDim2.new(0.5, -btnWidth/2, 0, yOffset)
     bg.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
     bg.BorderSizePixel = 0
-    bg.Parent = btn
+    bg.Parent = parentFrame
 
     -- Esquinas redondeadas
     local corner = Instance.new("UICorner")
@@ -127,6 +115,18 @@ local function createButton(name, yOffset, modulePath, parentFrame, loadFunc)
     }
     gradient.Rotation = 45
     gradient.Parent = bg
+
+    -- TextButton con texto encima del fondo
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(1, 0, 1, 0)
+    btn.Position = UDim2.new(0, 0, 0, 0)
+    btn.Text = name
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.TextSize = 14
+    btn.Font = Enum.Font.SourceSansBold
+    btn.BackgroundTransparency = 1
+    btn.BorderSizePixel = 0
+    btn.Parent = bg
 
     -- Efecto hover
     btn.MouseEnter:Connect(function()
@@ -153,7 +153,6 @@ local function createButton(name, yOffset, modulePath, parentFrame, loadFunc)
         end
     end)
 end
-
 
     -- ===== Crear botones debajo del logo =====
     local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
