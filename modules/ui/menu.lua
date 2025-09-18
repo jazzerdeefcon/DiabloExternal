@@ -123,8 +123,8 @@ function menu.init(loadModuleFunc)
     btn.Text = name
     btn.TextColor3 = Color3.fromRGB(255, 255, 255) -- texto blanco
     btn.TextSize = 16
-    --btn.Font = Enum.Font.SciFi
-    btn.Font = Enum.Font.FredokaOne
+    btn.Font = Enum.Font.SciFi
+    --btn.Font = Enum.Font.FredokaOne
     --btn.Font = Enum.Font.Fondamento
     btn.BackgroundTransparency = 1 -- transparente para mostrar el fondo
     btn.BorderSizePixel = 0
