@@ -10,25 +10,25 @@ function menu.init(core)
     gui.ResetOnSpawn = false
     gui.Parent = player:WaitForChild("PlayerGui")
 
-    -- Marco principal
+    -- Marco principal (fondo negro semitransparente)
     local mainFrame = Instance.new("Frame")
-    mainFrame.Size = UDim2.new(0, 300, 0, 200)
-    mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+    mainFrame.Size = UDim2.new(0, 300, 0, 400)
+    mainFrame.Position = UDim2.new(0.5, -150, 0.5, -200)
     mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    --mainFrame.BackgroundTransparency = 0
+    mainFrame.BackgroundTransparency = 0.3
     mainFrame.Active = true
     mainFrame.Draggable = true
     mainFrame.Parent = gui
 
-    -- Logo en el menu
+    -- Logo circular
     local logo = Instance.new("ImageLabel", mainFrame)
-    logo.Size = UDim2.new(0, 80, 0, 80)                 -- tamaño del logo
-    logo.Position = UDim2.new(0.5, -40, 0, 40)          -- centrado horizontal, 40px desde arriba
-    logo.BackgroundTransparency = 1                     -- fondo transparente
-    logo.Image = "rbxassetid://120947319794902"              -- ?? reemplaza con tu assetId del logo
- 
+    logo.Size = UDim2.new(0, 80, 0, 80)
+    logo.Position = UDim2.new(0.5, -40, 0, 20)
+    logo.BackgroundTransparency = 1
+    logo.Image = "rbxassetid://120947319794902"
+    logo.ScaleType = Enum.ScaleType.Fit
 
-    -- Titulo
+    -- Título del menú
     local title = Instance.new("TextLabel")
     title.Size = UDim2.new(1, -30, 0, 30)
     title.Position = UDim2.new(0, 5, 0, 5)
@@ -40,7 +40,7 @@ function menu.init(core)
     title.TextXAlignment = Enum.TextXAlignment.Left
     title.Parent = mainFrame
 
-    -- Boton cerrar (X)
+    -- Botón cerrar (X)
     local closeBtn = Instance.new("TextButton")
     closeBtn.Size = UDim2.new(0, 25, 0, 25)
     closeBtn.Position = UDim2.new(1, -30, 0, 5)
@@ -48,23 +48,20 @@ function menu.init(core)
     closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     closeBtn.TextSize = 14
     closeBtn.Font = Enum.Font.SourceSansBold
-    closeBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- fondo rojo
-    --closeBtn.BackgroundTransparency = 0 -- fondo totalmente visible
-    closeBtn.BorderSizePixel = 0 -- opcional: quitar borde gris
-    
+    closeBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    closeBtn.BorderSizePixel = 0
     closeBtn.Parent = mainFrame
 
     closeBtn.MouseButton1Click:Connect(function()
         gui:Destroy()
     end)
 
-    -- Aqui mas adelante agregaremos botones (aimbot, esp, noclip, etc.)
-
     -- ===== Función auxiliar para crear botones =====
     local function createButton(name, yOffset, modulePath)
+        local btnWidth, btnHeight = 120, 30
         local btn = Instance.new("TextButton")
-        btn.Size = UDim2.new(0, 120, 0, 30)
-        btn.Position = UDim2.new(0, 20, 0, yOffset)
+        btn.Size = UDim2.new(0, btnWidth, 0, btnHeight)
+        btn.Position = UDim2.new(0, (mainFrame.Size.X.Offset - btnWidth)/2, 0, yOffset)
         btn.Text = name
         btn.TextColor3 = Color3.fromRGB(255, 255, 255)
         btn.BackgroundColor3 = Color3.fromRGB(0, 120, 255)
@@ -84,12 +81,14 @@ function menu.init(core)
     end
 
     -- ===== Crear botones =====
-    createButton("Aimbot", 50, "modules/handlers/aimbot.lua")
-    createButton("ESP", 90, "modules/handlers/esp.lua")
-    createButton("Noclip", 130, "modules/handlers/noclip.lua")
-    createButton("Velocidad", 170, "modules/handlers/speed.lua")
-    createButton("Teleport", 210, "modules/handlers/teleport.lua")
-    createButton("Volar", 250, "modules/handlers/fly.lua")
+    local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
+    local spacing = 40
+    createButton("Aimbot", startY + spacing * 0, "modules/handlers/aimbot.lua")
+    createButton("ESP", startY + spacing * 1, "modules/handlers/esp.lua")
+    createButton("Noclip", startY + spacing * 2, "modules/handlers/noclip.lua")
+    createButton("Velocidad", startY + spacing * 3, "modules/handlers/speed.lua")
+    createButton("Teleport", startY + spacing * 4, "modules/handlers/teleport.lua")
+    createButton("Volar", startY + spacing * 5, "modules/handlers/fly.lua")
 end
 
 return menu
