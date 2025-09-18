@@ -89,20 +89,55 @@ function menu.init(core)
         gui:Destroy()
     end)
 
-   -- ===== Función auxiliar para crear botones =====
+   -- ===== Función auxiliar para crear botones estilizados =====
     local function createButton(name, yOffset, modulePath)
     local btnWidth, btnHeight = 240, 30
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(0, btnWidth, 0, btnHeight)
-    btn.Position = UDim2.new(0.5, -btnWidth/2, 0, yOffset)  -- centrado horizontal
+    btn.Position = UDim2.new(0.5, -btnWidth/2, 0, yOffset) -- centrado horizontal
     btn.Text = name
     btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    btn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
-    btn.Font = Enum.Font.SourceSansBold
     btn.TextSize = 14
+    btn.Font = Enum.Font.SourceSansBold
     btn.BorderSizePixel = 0
     btn.Parent = mainFrame
 
+    -- Esquinas redondeadas
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 6)
+    corner.Parent = btn
+
+    -- Borde rojo
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness = 2
+    stroke.Color = Color3.fromRGB(255, 0, 0)
+    stroke.Parent = btn
+
+    -- Degradado de fondo
+    local gradient = Instance.new("UIGradient")
+    gradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 50, 50)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 0, 0))
+    }
+    gradient.Rotation = 45
+    gradient.Parent = btn
+
+    -- Efecto hover
+    btn.MouseEnter:Connect(function()
+        gradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 80, 80)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 0, 0))
+        }
+    end)
+
+    btn.MouseLeave:Connect(function()
+        gradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 50, 50)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 0, 0))
+        }
+    end)
+
+    -- Conectar botón al módulo
     btn.MouseButton1Click:Connect(function()
         local mod = core.loadModule(modulePath)
         if mod and mod.init then
@@ -112,6 +147,7 @@ function menu.init(core)
         end
     end)
 end
+
 
     -- ===== Crear botones =====
     local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
