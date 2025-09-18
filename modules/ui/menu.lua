@@ -24,7 +24,7 @@ function menu.init(core)
     local logo = Instance.new("ImageLabel", mainFrame)
     logo.Size = UDim2.new(0, 80, 0, 80)                 -- tamaño del logo
     logo.Position = UDim2.new(0.5, -40, 0, 40)          -- centrado horizontal, 40px desde arriba
-    --logo.BackgroundTransparency = 0.2                     -- fondo transparente
+    logo.BackgroundTransparency = 1                     -- fondo transparente
     logo.Image = "rbxassetid://120947319794902"              -- ?? reemplaza con tu assetId del logo
  
 
@@ -32,7 +32,7 @@ function menu.init(core)
     local title = Instance.new("TextLabel")
     title.Size = UDim2.new(1, -30, 0, 30)
     title.Position = UDim2.new(0, 5, 0, 5)
-    -- title.BackgroundTransparency = 0.2
+    title.BackgroundTransparency = 1
     title.Text = "Diablo External"
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.TextSize = 16
