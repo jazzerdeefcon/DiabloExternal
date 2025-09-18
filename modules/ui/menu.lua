@@ -89,29 +89,29 @@ function menu.init(core)
         gui:Destroy()
     end)
 
-    -- ===== Función auxiliar para crear botones =====
+   -- ===== Función auxiliar para crear botones =====
     local function createButton(name, yOffset, modulePath)
-        local btnWidth, btnHeight = 240, 30
-        local btn = Instance.new("TextButton")
-        btn.Size = UDim2.new(0, btnWidth, 0, btnHeight)
-        btn.Position = UDim2.new(0, (mainFrame.Size.X.Offset - btnWidth)/2, 0, yOffset)
-        btn.Text = name
-        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-        btn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
-        btn.Font = Enum.Font.SourceSansBold
-        btn.TextSize = 14
-        btn.BorderSizePixel = 0
-        btn.Parent = mainFrame
+    local btnWidth, btnHeight = 240, 30
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0, btnWidth, 0, btnHeight)
+    btn.Position = UDim2.new(0.5, -btnWidth/2, 0, yOffset)  -- centrado horizontal
+    btn.Text = name
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
+    btn.Font = Enum.Font.SourceSansBold
+    btn.TextSize = 14
+    btn.BorderSizePixel = 0
+    btn.Parent = mainFrame
 
-        btn.MouseButton1Click:Connect(function()
-            local mod = core.loadModule(modulePath)
-            if mod and mod.init then
-                mod.init()
-            else
-                warn("No se pudo cargar el módulo: " .. modulePath)
-            end
-        end)
-    end
+    btn.MouseButton1Click:Connect(function()
+        local mod = core.loadModule(modulePath)
+        if mod and mod.init then
+            mod.init()
+        else
+            warn("No se pudo cargar el módulo: " .. modulePath)
+        end
+    end)
+end
 
     -- ===== Crear botones =====
     local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
