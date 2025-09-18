@@ -16,7 +16,7 @@ local function parseDate(str)
 end
 
 -- ======================
--- Función para mostrar mensaje en pantalla
+-- Función para mostrar mensaje en pantalla temporalmente
 -- ======================
 local function showMessage(msg, color, duration)
     duration = duration or 3 -- duración por defecto en segundos
@@ -38,9 +38,12 @@ local function showMessage(msg, color, duration)
 
     -- Destruir el mensaje automáticamente después de duration segundos
     task.delay(duration, function()
-        gui:Destroy()
+        if gui and gui.Parent then
+            gui:Destroy()
+        end
     end)
 end
+
 -- ======================
 -- Verificación de licencia/fecha
 -- ======================
@@ -51,7 +54,7 @@ if now > expire then
     showMessage("❌ Este script ha expirado. Contacta al desarrollador.", Color3.fromRGB(200,0,0))
     return
 else
-    showMessage("✅ Licencia válida. Cargando módulos...", Color3.fromRGB(0,200,0))
+    showMessage("✅ Licencia válida. Cargando módulos...", Color3.fromRGB(0,200,0), 2)
 end
 
 -- ======================
@@ -65,7 +68,7 @@ local function loadModule(path)
 
     if not success then
         warn("Error al cargar módulo: " .. path, result)
-        showMessage("⚠ Error cargando módulo: " .. path, Color3.fromRGB(255,100,0))
+        showMessage("⚠ Error cargando módulo: " .. path, Color3.fromRGB(255,100,0), 3)
         return nil
     end
 
@@ -79,8 +82,8 @@ local menu = loadModule("modules/ui/menu.lua")
 
 if menu and menu.init then
     menu.init()
-    showMessage("✅ Menú cargado correctamente", Color3.fromRGB(0,200,0))
+    showMessage("✅ Menú cargado correctamente", Color3.fromRGB(0,200,0), 2)
 else
     warn("El menú no se pudo inicializar")
-    showMessage("⚠ El menú no se pudo inicializar", Color3.fromRGB(255,100,0))
+    showMessage("⚠ El menú no se pudo inicializar", Color3.fromRGB(255,100,0), 3)
 end
