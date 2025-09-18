@@ -27,7 +27,7 @@ function menu.init(core)
 
     local uistroke = Instance.new("UIStroke")
     uistroke.Thickness = 2
-    uistroke.Color = Color3.fromRGB(255, 255, 255) -- borde blanco
+    uistroke.Color = Color3.fromRGB(255, 0, 0) -- borde rojo
     uistroke.Parent = mainFrame
 
 
