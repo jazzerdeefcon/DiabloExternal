@@ -5,14 +5,14 @@
 -- ======================
 -- Configuración
 -- ======================
-local EXPIRATION_DATE = "2025-09-30" -- AAAA-MM-DD
+--local EXPIRATION_DATE = "2025-09-30" -- AAAA-MM-DD
 
 -- ======================
 -- Función para parsear fecha
 -- ======================
-local function parseDate(str)
-    local y, m, d = string.match(str, "(%d+)%-(%d+)%-(%d+)")
-    return os.time({year = y, month = m, day = d, hour = 0})
+--local function parseDate(str)
+--    local y, m, d = string.match(str, "(%d+)%-(%d+)%-(%d+)")
+--   return os.time({year = y, month = m, day = d, hour = 0})
 end
 
 
