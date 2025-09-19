@@ -12,7 +12,7 @@ local EXPIRATION_DATE = "2025-09-30" -- AAAA-MM-DD
 -- ======================
 local function parseDate(str)
     local y, m, d = string.match(str, "(%d+)%-(%d+)%-(%d+)")
-   return os.time({year = y, month = m, day = d, hour = 0})
+    return os.time({year = y, month = m, day = d, hour = 0})
 end
 
 
