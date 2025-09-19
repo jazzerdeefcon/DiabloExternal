@@ -1,11 +1,11 @@
 -- modules/ui/menu.lua
 -- Menu principal de DiabloExternal
     local menu = {}
-    Menu.VERSION = "v0.0" -- valor por defecto
- function menu.init(loadModuleFunc, version) -- <-- ahora recibe también la versión
+    --Menu.VERSION = "v0.0" -- valor por defecto
+ function menu.init(loadModuleFunc,) -- <-- ahora recibe también la versión
     -- Si recibimos una version, la asignamos
-    if version then
-        Menu.VERSION = version
+    --if version then
+        --Menu.VERSION = version
     end
     local player = game:GetService("Players").LocalPlayer
     local gui = Instance.new("ScreenGui")
