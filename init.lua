@@ -1,67 +1,98 @@
-local player = game.Players.LocalPlayer
-local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-gui.Name = "D3fc0n"
-gui.ResetOnSpawn = false
+-- init.lua
+-- ======================
+-- Función para mostrar mensaje en pantalla temporalmente
+-- ======================
+local messageQueue = {} -- Cola de mensajes activos
 
--- Crear Frame principal
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 200, 0, 180)
-frame.Position = UDim2.new(0.5, -100, 0.5, -90)
-frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-frame.Parent = gui
+local function showMessage(msg, color, duration)
+    duration = duration or 3
+    local player = game:GetService("Players").LocalPlayer
+    local gui = player:FindFirstChild("DiabloMessageGui")
 
--- Label para mostrar mensajes
-local msgLabel = Instance.new("TextLabel")
-msgLabel.Size = UDim2.new(1, -20, 0, 30)
-msgLabel.Position = UDim2.new(0, 10, 0, 140) -- debajo de los botones
-msgLabel.BackgroundTransparency = 1
-msgLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-msgLabel.TextScaled = true
-msgLabel.Text = ""
-msgLabel.Parent = frame
+    -- Crear ScreenGui si no existe
+    if not gui then
+        gui = Instance.new("ScreenGui")
+        gui.Name = "DiabloMessageGui"
+        gui.ResetOnSpawn = false
+        gui.Parent = player:WaitForChild("PlayerGui")
+    end
 
--- Función para crear botones
-local function createButton(text, yPos, callback)
-    local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(0, 180, 0, 30)
-    btn.Position = UDim2.new(0, 10, 0, yPos)
-    btn.Text = text
-    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    btn.BackgroundColor3 = Color3.fromRGB(3, 182, 252)
-    btn.Parent = frame
-    btn.MouseButton1Click:Connect(callback)
+    -- Crear label para el mensaje
+    local label = Instance.new("TextLabel")
+    label.BackgroundColor3 = color or Color3.fromRGB(25, 25, 25)
+    label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    label.Text = msg
+    label.TextSize = 18
+    label.Font = Enum.Font.SourceSansBold
+    label.TextWrapped = true
+    label.TextXAlignment = Enum.TextXAlignment.Center
+    label.BackgroundTransparency = 0.2
+    label.BorderSizePixel = 0
+    label.AnchorPoint = Vector2.new(0.5, 0)
+    label.Position = UDim2.new(0.5, 0, 0, 0)
+    label.Size = UDim2.new(0.4, 0, 0, 40)
+    label.Parent = gui
+    label.TextTransparency = 1 -- inicio invisible
+    table.insert(messageQueue, label)
+
+    -- Ajustar posiciones de todos los mensajes en la cola
+    for i, msgLabel in ipairs(messageQueue) do
+        local targetY = 100 + (i-1)*(msgLabel.Size.Y.Offset + 5)
+        msgLabel:TweenPosition(UDim2.new(0.5, 0, 0, targetY), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true)
+    end
+
+    -- Fade in
+    for i = 0, 1, 0.1 do
+        task.wait(0.02)
+        label.TextTransparency = 1 - i
+    end
+
+    -- Destruir mensaje después de duration
+    task.delay(duration, function()
+        -- Fade out
+        for i = 0, 1, 0.1 do
+            task.wait(0.02)
+            label.TextTransparency = i
+        end
+
+        -- Remover de la cola y destruir
+        for i, v in ipairs(messageQueue) do
+            if v == label then
+                table.remove(messageQueue, i)
+                break
+            end
+        end
+        label:Destroy()
+
+        -- Reajustar posiciones de los mensajes restantes
+        for i, msgLabel in ipairs(messageQueue) do
+            local targetY = 100 + (i-1)*(msgLabel.Size.Y.Offset + 5)
+            msgLabel:TweenPosition(UDim2.new(0.5, 0, 0, targetY), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true)
+        end
+    end)
 end
 
--- Módulos embebidos directamente
-local Button1 = {}
-function Button1:Run()
-    msgLabel.Text = "Este es el archivo que lanza el Botón 1"
+-- ======================
+-- Función Init expuesta
+-- ======================
+local function init(loadModule, version)
+    -- Mostrar mensaje de carga con la versión
+    showMessage("✅ Licencia válida. Cargando módulos... " .. (version or ""), Color3.fromRGB(0,200,0), 2)
+
+    -- Cargar menú principal
+    local menu = loadModule("modules/ui/menu.lua")
+    if menu and menu.init then
+        menu.init(loadModule, version) -- Pasamos la función y la versión al menú
+        showMessage("✅ Menú cargado correctamente", Color3.fromRGB(0,200,0), 2)
+    else
+        warn("El menú no se pudo inicializar")
+        showMessage("⚠ El menú no se pudo inicializar", Color3.fromRGB(255,100,0), 3)
+    end
 end
 
-local Button2 = {}
-function Button2:Run()
-    msgLabel.Text = "Este es el archivo que lanza el Botón 2"
-end
-
-local Button3 = {}
-function Button3:Run()
-    msgLabel.Text = "Este es el archivo que lanza el Botón 3"
-end
-
--- Crear botones principales
-createButton("Botón 1", 10, function() Button1:Run() end)
-createButton("Botón 2", 50, function() Button2:Run() end)
-createButton("Botón 3", 90, function() Button3:Run() end)
-
--- Botón cerrar
-local closeBtn = Instance.new("TextButton")
-closeBtn.Size = UDim2.new(0, 30, 0, 30)
-closeBtn.Position = UDim2.new(1, -35, 0, 5) -- esquina superior derecha
-closeBtn.Text = "X"
-closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-closeBtn.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
-closeBtn.Parent = frame
-
-closeBtn.MouseButton1Click:Connect(function()
-    gui:Destroy() -- cierra todo el menú
-end)
+-- ======================
+-- Exportar init
+-- ======================
+return {
+    init = init
+}
