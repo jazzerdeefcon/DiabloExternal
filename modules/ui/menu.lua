@@ -31,17 +31,30 @@ function menu.init(loadModuleFunc, version) -- <-- ahora recibe también la vers
     uistroke.Parent = mainFrame
 
     -- ===== Versión en la esquina superior izquierda =====
+    --local versionLabel = Instance.new("TextLabel")
+    --versionLabel.Size = UDim2.new(0, 80, 0, 20)
+    --versionLabel.Position = UDim2.new(0, 5, 0, 5) -- top-left
+    --versionLabel.BackgroundTransparency = 1
+    --versionLabel.Text = version or "v0.0"
+    --versionLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
+    --versionLabel.TextSize = 12
+    --versionLabel.Font = Enum.Font.SourceSansItalic
+    --versionLabel.TextXAlignment = Enum.TextXAlignment.Left
+    --versionLabel.Parent = mainFrame
+
+    -- ===== Versión en la esquina inferior derecha =====
     local versionLabel = Instance.new("TextLabel")
-    versionLabel.Size = UDim2.new(0, 80, 0, 20)
-    versionLabel.Position = UDim2.new(0, 5, 0, 5) -- top-left
+    versionLabel.Size = UDim2.new(0, 80, 0, 20) -- ancho y alto del label
+    versionLabel.Position = UDim2.new(1, -85, 1, -25) -- esquina inferior derecha con margenes
     versionLabel.BackgroundTransparency = 1
     versionLabel.Text = version or "v0.0"
     versionLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
     versionLabel.TextSize = 12
     versionLabel.Font = Enum.Font.SourceSansItalic
-    versionLabel.TextXAlignment = Enum.TextXAlignment.Left
+    versionLabel.TextXAlignment = Enum.TextXAlignment.Right
+    versionLabel.TextYAlignment = Enum.TextYAlignment.Bottom
     versionLabel.Parent = mainFrame
-
+    
     -- Variable para controlar visibilidad
     local isVisible = true
 
