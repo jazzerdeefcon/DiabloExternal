@@ -81,11 +81,25 @@ function menu.init(loadModuleFunc, version) -- <-- ahora recibe también la vers
     logo.ScaleType = Enum.ScaleType.Fit
 
     -- Título del menú
+    --local title = Instance.new("TextLabel")
+    --title.Size = UDim2.new(1, 0, 0, 30)
+    --title.Position = UDim2.new(0, 0, 1, -35)
+    --title.BackgroundTransparency = 1
+    --title.Text = "Diablo External" 
+    --title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    --title.TextTransparency = 0.4
+    --title.TextSize = 16
+    --title.Font = Enum.Font.SciFi
+    --title.TextXAlignment = Enum.TextXAlignment.Center
+    --title.TextYAlignment = Enum.TextYAlignment.Center
+    --title.Parent = mainFrame
+    -- Título del menú (debajo del logo)
     local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, 0, 0, 30)
-    title.Position = UDim2.new(0, 0, 1, -35)
+    title.Size = UDim2.new(1, 0, 0, 25)
+    title.Position = UDim2.new(0, 0, 0, logo.Position.Y.Offset + logo.Size.Y.Offset + 5) 
+    -- logo.Y (20) + logo.height (80) + 5px de margen = 105px desde arriba
     title.BackgroundTransparency = 1
-    title.Text = "Diablo External" 
+    title.Text = "Diablo External"
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.TextTransparency = 0.4
     title.TextSize = 16
@@ -94,6 +108,7 @@ function menu.init(loadModuleFunc, version) -- <-- ahora recibe también la vers
     title.TextYAlignment = Enum.TextYAlignment.Center
     title.Parent = mainFrame
 
+    
     -- Botón cerrar (X)
     local closeBtn = Instance.new("TextButton")
     closeBtn.Size = UDim2.new(0, 25, 0, 25)
