@@ -195,7 +195,18 @@ function menu.init(loadModuleFunc, version) -- <-- ahora recibe también la vers
     end
 
     -- ===== Crear botones debajo del logo =====
-    local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
+    --local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 20
+    --local spacing = 40
+    --createButton("AIMBOT",   startY + spacing * 0, "modules/handlers/aimbot.lua",   mainFrame, loadModuleFunc)
+    --createButton("ESP",      startY + spacing * 1, "modules/handlers/esp.lua",      mainFrame, loadModuleFunc)
+    --createButton("NOCLIP",   startY + spacing * 2, "modules/handlers/noclip.lua",   mainFrame, loadModuleFunc)
+    --createButton("SPEED",    startY + spacing * 3, "modules/handlers/speed.lua",    mainFrame, loadModuleFunc)
+    --createButton("TELEPORT", startY + spacing * 4, "modules/handlers/teleport.lua", mainFrame, loadModuleFunc)
+    --createButton("FLY",      startY + spacing * 5, "modules/handlers/fly.lua",      mainFrame, loadModuleFunc)
+
+    -- ===== Crear botones debajo del título =====
+    local titleBottomY = title.Position.Y.Offset + title.Size.Y.Offset
+    local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 10 + title.Size.Y.Offset -- 10 px de margen entre logo y título
     local spacing = 40
     createButton("AIMBOT",   startY + spacing * 0, "modules/handlers/aimbot.lua",   mainFrame, loadModuleFunc)
     createButton("ESP",      startY + spacing * 1, "modules/handlers/esp.lua",      mainFrame, loadModuleFunc)
@@ -203,6 +214,7 @@ function menu.init(loadModuleFunc, version) -- <-- ahora recibe también la vers
     createButton("SPEED",    startY + spacing * 3, "modules/handlers/speed.lua",    mainFrame, loadModuleFunc)
     createButton("TELEPORT", startY + spacing * 4, "modules/handlers/teleport.lua", mainFrame, loadModuleFunc)
     createButton("FLY",      startY + spacing * 5, "modules/handlers/fly.lua",      mainFrame, loadModuleFunc)
+
 end
 
 return menu
