@@ -206,7 +206,7 @@ function menu.init(loadModuleFunc, version) -- <-- ahora recibe también la vers
 
     -- ===== Crear botones debajo del título =====
     local titleBottomY = title.Position.Y.Offset + title.Size.Y.Offset
-    local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 8 + title.Size.Y.Offset -- 10 px de margen entre logo y título
+    local startY = logo.Position.Y.Offset + logo.Size.Y.Offset + 5 + title.Size.Y.Offset -- 10 px de margen entre logo y título
     local spacing = 40
     createButton("AIMBOT",   startY + spacing * 0, "modules/handlers/aimbot.lua",   mainFrame, loadModuleFunc)
     createButton("ESP",      startY + spacing * 1, "modules/handlers/esp.lua",      mainFrame, loadModuleFunc)
