@@ -87,17 +87,34 @@ end
 -- ======================
 -- Cargar menú principal
 -- ======================
--- mini-init debe pasar VERSION como argumento
-local VERSION = VERSION or "v0.0" -- esto viene del mini-init 
-local menu = loadModule("modules/ui/menu.lua") 
-if menu and menu.init then 
-    menu.init(loadModule, VERSION) -- ✅ ahora recibe versión 
-    showMessage("✅ Menú cargado correctamente",
-Color3.fromRGB(0,200,0), 2) 
-else 
-    warn("El menú no se pudo inicializar") 
-    showMessage("⚠ El menú no se pudo inicializar", 
-Color3.fromRGB(255,100,0), 3) 
+
+
+
+-- VERSION DEFINIDA como argumento directo
+local VERSION = "v1.0.0"   -- aquí pones la versión actual
+
+-- Cargar menú principal
+local menu = loadModule("modules/ui/menu.lua")
+if menu and menu.init then
+    menu.init(loadModule, VERSION) -- ✅ ahora recibe versión fija
+    showMessage("✅ Menú cargado correctamente", Color3.fromRGB(0,200,0), 2)
+else
+    warn("El menú no se pudo inicializar")
+    showMessage("⚠ El menú no se pudo inicializar", Color3.fromRGB(255,100,0), 3)
 end
+
+
+--local VERSION = VERSION or "v0.0" -- esto viene del mini-init 
+--local menu = loadModule("modules/ui/menu.lua") 
+--if menu and menu.init then 
+    --menu.init(loadModule, VERSION) -- ✅ ahora recibe versión 
+    --showMessage("✅ Menú cargado correctamente",
+--Color3.fromRGB(0,200,0), 2) 
+--else 
+    --warn("El menú no se pudo inicializar") 
+    --showMessage("⚠ El menú no se pudo inicializar", 
+--Color3.fromRGB(255,100,0), 3) 
+--end
+
 
 
