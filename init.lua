@@ -91,7 +91,7 @@ end
 
 
 -- VERSION DEFINIDA como argumento directo
-local VERSION = "v1.0.0"   -- aquí pones la versión actual
+local VERSION = "v1.0"   -- aquí pones la versión actual
 
 -- Cargar menú principal
 local menu = loadModule("modules/ui/menu.lua")
@@ -115,6 +115,7 @@ end
     --showMessage("⚠ El menú no se pudo inicializar", 
 --Color3.fromRGB(255,100,0), 3) 
 --end
+
 
 
 
